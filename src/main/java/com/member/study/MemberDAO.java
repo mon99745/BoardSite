@@ -158,6 +158,52 @@ public class MemberDAO {
 		return dto;
 	} //getDetailMember()
 	
+	//비밀번호 검색
+	public String getMember_pw(String id) {
+		conn = getConn();
+		String sql = "SELECT member_pw FROM boardMember WHERE member_id = ?";
+		String member_pw = null;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				member_pw = rs.getString("member_pw");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("getMember_pw() Exception!!!");
+		} finally {
+			dbClose();
+		}
+		return member_pw;
+	} //getMember_pw()
+	
+	//회원 정보 수정
+	public int updateMember(MemberDTO dto) {
+		conn = getConn();
+		String sql = "UPDATE boardMember SET member_pw = ?, member_name = ?,";
+		sql += " member_age = ?, member_gender = ?, member_email = ? WHERE member_id = ?";
+		int succ = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, dto.getMember_pw());
+			ps.setString(2, dto.getMember_name());
+			ps.setInt(3, dto.getMember_age());
+			ps.setString(4, dto.getMember_gender());
+			ps.setString(5, dto.getMember_email());
+			ps.setString(6, dto.getMember_id());
+			succ = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("updateMember() Exception!!!");
+		} finally {
+			dbClose();
+		}
+		return succ;
+	} //updateMember()
+	
 	//DB 종료
 	public void dbClose() {
 		try {
