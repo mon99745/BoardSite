@@ -89,18 +89,21 @@ public class BoardDAO {
 		
 		//전체 글 목록 조회(Feat : 페이징 
 		public ArrayList<BoardDTO> getBoardList(int page, int limit) {
-			conn = getConn();
-			String sql = "SELECT * FROM";
-			sql += " (SELECT ROWNUM rnum, board_num, board_id,";
-			sql	+= " board_subject, board_content, board_file, board_re_ref,";
-			sql += " board_re_lev, board_re_seq, board_readcount, board_date";
-			sql	+= " FROM (SELECT * FROM memberBoard ORDER BY";
-			sql += " board_re_ref DESC, board_re_seq ASC)a)b"; //서브 쿼리 alias a,b
-			sql +=  "WHERE rnum >= ? and rnum <= ?";
-			int startRow = (page - 1) * 10 + 1; //읽기 시작할 rownum
+			Connection conn = null;
+	        PreparedStatement statement = null;
+	        ResultSet resultset = null;
+
+			String sql = "SELECT board_num, board_id,board_subject, "
+					+ "board_content, board_file, "
+					+ "board_re_ref,board_re_lev, board_re_seq, "
+					+ "board_readcount, board_date FROM memberBoard ORDER BY board_re_ref DESC LIMIT ? , ?";
+			
+			int startRow = (page - 1) * 10; //읽기 시작할 rownum
 			int endRow = startRow + limit - 1;	//읽을 마지막 rownum
+			
 			ArrayList<BoardDTO> list = new ArrayList<>();
 			try {
+				conn = this.getConn();
 				ps = conn.prepareStatement(sql);
 				ps.setInt(1, startRow);
 				ps.setInt(2, endRow);
