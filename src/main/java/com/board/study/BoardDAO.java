@@ -87,7 +87,7 @@ public class BoardDAO {
 			return listCount;
 		} //getListCount()
 		
-		//전체 글 목록 조회(Feat : 페이징 
+		//전체 글 목록 조회(+페이징) 
 		public ArrayList<BoardDTO> getBoardList(int page, int limit) {
 			Connection conn = null;
 	        PreparedStatement statement = null;
@@ -167,8 +167,8 @@ public class BoardDAO {
 		//조회수 증가
 		public void readCount(int board_num) {
 			conn =getConn();
-			String sql = "UPDATE memberBoard SET board_readcount = ";
-			sql += "board_readcount + 1 WHERE board_num = ?";
+			String sql = "UPDATE memberBoard SET board_readcount "
+					+ "= board_readcount + 1 WHERE board_num = ?";
 			try {
 				ps = conn.prepareStatement(sql);
 				ps.setInt(1, board_num);
@@ -226,8 +226,8 @@ public class BoardDAO {
 		//글 수정
 		public int boardUpdate(BoardDTO dto) {
 			conn = getConn();
-			String sql = "UPDATE memberBoard SET board_subject = ?, ";
-			sql += "board_content = ? WHERE board_num = ?";
+			String sql = "UPDATE memberBoard SET board_subject = ?,"
+					+ "board_content = ? WHERE board_num = ?";
 			int succ = 0;
 			try {
 				ps = conn.prepareStatement(sql);
@@ -263,8 +263,8 @@ public class BoardDAO {
 				int re_lev = dto.getBoard_re_lev();	//답글의 깊이
 				int re_seq = dto.getBoard_re_seq();	//답글의 순서
 				
-				String sql = "UPDATE memberBoard SET board_re_seq = board_re_seq + 1";
-				sql += "WHERE board_re_ref = ? AND board_re_seq > ?";
+				String sql = "UPDATE memberBoard SET board_re_seq = board_re_seq + 1 "
+						+ "WHERE board_re_ref = ? AND board_re_seq > ?";
 				ps = conn.prepareStatement(sql);
 				ps.setInt(1, re_ref);
 				ps.setInt(2, re_seq);
@@ -273,10 +273,10 @@ public class BoardDAO {
 				re_seq += 1;
 				re_lev += 1;
 				
-				sql = "INSERT INTO memberBoard(board_num, board_id, board_subject, ";
-				sql += "board_content, board_file, board_re_ref, board_re_lev, ";
-				sql += "board_re_seq, board_readcount, board_date)";
-				sql += " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+				sql = "INSERT INTO memberBoard(board_num, board_id, board_subject, "
+						+ "board_content, board_file, board_re_ref, "
+						+ "board_re_lev, board_re_seq, board_readcount, board_date) "
+						+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
 				ps = conn.prepareStatement(sql);
 				ps.setInt(1, num);
 				ps.setString(2, dto.getBoard_id());

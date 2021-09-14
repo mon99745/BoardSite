@@ -42,9 +42,11 @@ public class MemberLoginAction implements Action {
 			session.setAttribute("id", dto.getMember_id()); //바인딩 객체
 			
 			ActionForward forward = new ActionForward();
+//			forward.setPath("choice.jsp");
 			forward.setPath("boardList.bo");
 			forward.setRedirect(false);
 			return forward;
 		}
 	}
 }
+
