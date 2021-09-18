@@ -53,6 +53,5 @@
   	<servlet-name>BoardFrontController</servlet-name>
   	<url-pattern>*.bo</url-pattern>
   </servlet-mapping>
-
-
+  
 </web-app>

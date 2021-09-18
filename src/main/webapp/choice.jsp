@@ -8,8 +8,8 @@
 </head>
 <body>
 <center> 
-<button onclick = "location.href"='boardList.bo' >자유 게시판</button>
-<button>실시간 채팅</button>
+<button onclick = "location.href='boardList.bo'" >자유 게시판</button>
+<button onclick = "location.href='./chat/chat.jsp'">실시간 채팅</button>
 </center>
 </body>
 </html>
