@@ -26,11 +26,12 @@
 		var messageTextArea = document.getElementById("messageTextArea");
 		// WebSocket 서버와 접속이 되면 호출되는 함수
 		webSocket.onopen = function(message) {
-			messageTextArea.value += "서버와 연결이 완료 되었습니다.\n";
+			messageTextArea.value += "<< 서버와 연결이 완료 되었습니다. >>\n";
+			messageTextArea.value += "❗️지나친 욕설과 성희롱 관련의 폭언은 처벌의 대상이 될 수 있습니다."
 		};
 		// WebSocket 서버와 접속이 끊기면 호출되는 함수
 		webSocket.onclose = function(message) {
-			messageTextArea.value += "서버와 연결이 중단되었습니다.\n";
+			messageTextArea.value += "<< 서버와 연결이 중단 되었습니다. >>\n";
 		};
 		// WebSocket 서버와 통신 중에 에러가 발생하면 요청되는 함수
 		webSocket.onerror = function(message) {
