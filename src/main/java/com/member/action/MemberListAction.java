@@ -33,17 +33,17 @@ public class MemberListAction implements Action {
 			out.println("location.href='boardList.bo';</script>");
 			return null;
 		} else {	//관리자 계정이라면
-			/*
+//			System.out.println("Ok.");
 			//제대로 접근되는지 확인
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('관리자로 로그인 하셨습니다!');</script>");
-			*/
+			
 			MemberDAO dao = new MemberDAO();
 			ArrayList<MemberDTO> list = new ArrayList<>(); 
 			list = dao.getAllMember();
 			request.setAttribute("list", list);
-			forward.setPath("member/member_list.jsp");
+			forward.setPath("/member/member_list.jsp");
 			forward.setRedirect(false);
 			return forward;
 		}

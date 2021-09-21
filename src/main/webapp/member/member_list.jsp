@@ -1,6 +1,9 @@
 <%@ page import="com.member.study.MemberDTO"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.member.study.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 
 <%
 ArrayList<MemberDTO> list = (ArrayList<MemberDTO>)request.getAttribute("list");
@@ -27,19 +30,19 @@ ArrayList<MemberDTO> list = (ArrayList<MemberDTO>)request.getAttribute("list");
 			<th>이름</th>
 			<th>삭제</th>
 		</tr>
-		
-		<core:forEach var="i" items="${list }">
+		<!-- jstl 구문 배열 호출 -->
+		<c:forEach var="i" items="${list }"> <!-- core: forEach 에서 core을 c로 생략   -->
 			<tr>
 				<td><a href="memberViewAction.me?member_id=${i.member_id }">${i.member_id }</a></td>
 				<td>${i.member_name }</td>
 				<td align="center">
-					<core:if test="${i.member_id eq 'admin' }">삭제 금지</core:if>
-					<core:if test="${i.member_id ne 'admin' }">
+					<c:if test="${i.member_id eq 'admin' }">삭제 금지</c:if>
+					<c:if test="${i.member_id ne 'admin' }">
 						<input type="button" value="삭제" onclick="fnDelete('${i.member_id }')" />
-					</core:if>
+					</c:if>
 				</td>
 			</tr>
-		</core:forEach>
+		</c:forEach>
 		
 		<tr>
 			<td colspan="3">
