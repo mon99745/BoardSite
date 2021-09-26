@@ -6,18 +6,11 @@
 <title>Web Socket Example</title>
 </head>
 <body>
-	<form>
-		<input id="user" type="text" value="anonymous"> <!-- 유저명 박스 -->
-		<input id="textMessage" type="text"> <!-- 메시지 박스 -->
-		<input onclick="sendMessage()" value="Send" type="button"> <!-- 메시지 송신버튼 -->
-		<input onclick="disconnect()" value="Disconnect" type="button"> <!-- 종료버튼 -->
-	</form>
 	<br />
 	<!-- 콘솔 메시지의 역할을 하는 로그 텍스트 에리어.(수신 메시지도 표시한다.) -->
-	<textarea id="messageTextArea" rows="10" cols="50"></textarea>
+	<textarea id="messageTextArea" rows="20" cols="60"></textarea>
 	<script type="text/javascript">
 	// 콘솔 텍스트에 메시지를 출력한다.
-	
 		// 「broadsocket」는 호스트 명
 		// WebSocket 오브젝트 생성 , 자동 onopen 접속
 		var webSocket = new WebSocket(
@@ -27,7 +20,7 @@
 		// WebSocket 서버와 접속이 되면 호출되는 함수
 		webSocket.onopen = function(message) {
 			messageTextArea.value += "<< 서버와 연결이 완료 되었습니다. >>\n";
-			messageTextArea.value += "❗️지나친 욕설과 성희롱 관련의 폭언은 처벌의 대상이 될 수 있습니다."
+			messageTextArea.value += "❗️지나친 욕설과 성희롱 관련의 폭언은 처벌의 대상이 될 수 있습니다❗"
 		};
 		// WebSocket 서버와 접속이 끊기면 호출되는 함수
 		webSocket.onclose = function(message) {
@@ -59,5 +52,11 @@
 			webSocket.close();
 		}
 	</script>
+	<form>
+		<input id="user" type="text" value="anonymous"> <!-- 유저명 박스 -->
+		<input id="textMessage" type="text"> <!-- 메시지 박스 -->
+		<input onclick="sendMessage()" value="Send" type="button"> <!-- 메시지 송신버튼 -->
+		<input onclick="disconnect()" value="Disconnect" type="button"> <!-- 종료버튼 -->
+	</form>
 </body>
 </html>
